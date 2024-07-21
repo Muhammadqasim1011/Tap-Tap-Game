@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tap Tap Mining</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Tap Tap Mining</h1>
+        <nav>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#leaderboard">Leaderboard</a>
+            <a href="#profile">Profile</a>
+        </nav>
+    </header>
+    <main>
+        <section id="dashboard">
+            <div id="tap-area">Tap Here!</div>
+            <div id="info">
+                <p>Coins: <span id="coin-balance">0</span></p>
+                <p>Tap Count: <span id="tap-count">0</span></p>
+                <p>Income per Tap: <span id="tap-income">1</span></p>
+                <p>Income per Hour: <span id="hourly-income">0</span></p>
+                <p>Max Taps: <span id="max-taps">1000</span></p>
+            </div>
+            <button id="upgrade-tap-income">Upgrade Tap Income (<span id="upgrade-tap-income-cost">10</span> coins)</button>
+            <button id="upgrade-hourly-income">Upgrade Hourly Income (<span id="upgrade-hourly-income-cost">20</span> coins)</button>
+            <button id="claim-reward">Claim Daily Reward</button>
+        </section>
+        <section id="leaderboard">
+            <h2>Leaderboard</h2>
+            <ul id="leaderboard-list"></ul>
+        </section>
+        <section id="profile">
+            <h2>Your Profile</h2>
+            <p>Username: <span id="username">Guest</span></p>
+            <p>Achievements: <span id="achievements">None</span></p>
+            <p>Referral Code: <span id="referral-code">XXXXXX</span></p>
+            <button id="reset">Reset Game</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Tap Tap Mining</p>
+    </footer>
+    <script src="game.js"></script>
+    <script src="leaderboard.js"></script>
+    <script src="profile.js"></script>
+    <script src="dailyRewards.js"></script>
+    <script src="notifications.js"></script>
+    <script src="payment.js"></script>
+</body>
+</html>
