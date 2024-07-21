@@ -7,17 +7,18 @@ let hourlyIncome = parseFloat(localStorage.getItem('hourlyIncome')) || 0;
 let upgradeTapIncomeCost = parseFloat(localStorage.getItem('upgradeTapIncomeCost')) || 10;
 let upgradeHourlyIncomeCost = parseFloat(localStorage.getItem('upgradeHourlyIncomeCost')) || 20;
 
-// Update UI elements with the current values
+// Function to update the UI elements with the current values
 const updateUI = () => {
     document.getElementById('coin-balance').textContent = coins.toFixed(2);
     document.getElementById('tap-count').textContent = tapCount;
-    document.getElementById('tap-income').textContent = tapIncome;
+    document.getElementById('tap-income').textContent = tapIncome.toFixed(2);
     document.getElementById('hourly-income').textContent = hourlyIncome.toFixed(2);
     document.getElementById('max-taps').textContent = maxTaps.toFixed(2);
     document.getElementById('upgrade-tap-income-cost').textContent = upgradeTapIncomeCost.toFixed(2);
     document.getElementById('upgrade-hourly-income-cost').textContent = upgradeHourlyIncomeCost.toFixed(2);
 };
 
+// Function to save the game state to local storage
 const saveGame = () => {
     localStorage.setItem('coins', coins.toFixed(2));
     localStorage.setItem('tapIncome', tapIncome);
@@ -28,6 +29,7 @@ const saveGame = () => {
     localStorage.setItem('upgradeHourlyIncomeCost', upgradeHourlyIncomeCost.toFixed(2));
 };
 
+// Event listener for tapping the tap area
 document.getElementById('tap-area').addEventListener('click', function() {
     if (maxTaps > 0) {
         tapCount++;
@@ -40,11 +42,12 @@ document.getElementById('tap-area').addEventListener('click', function() {
     }
 });
 
+// Event listener for upgrading tap income
 document.getElementById('upgrade-tap-income').addEventListener('click', function() {
     if (coins >= upgradeTapIncomeCost) {
         coins -= upgradeTapIncomeCost;
-        tapIncome = Math.floor(tapIncome * 1.1);
-        upgradeTapIncomeCost = Math.floor(upgradeTapIncomeCost * 1.1);
+        tapIncome = tapIncome * 1.2;
+        upgradeTapIncomeCost = upgradeTapIncomeCost * 1.3;
         updateUI();
         saveGame();
     } else {
@@ -52,11 +55,12 @@ document.getElementById('upgrade-tap-income').addEventListener('click', function
     }
 });
 
+// Event listener for upgrading hourly income
 document.getElementById('upgrade-hourly-income').addEventListener('click', function() {
     if (coins >= upgradeHourlyIncomeCost) {
         coins -= upgradeHourlyIncomeCost;
-        hourlyIncome = Math.floor(hourlyIncome * 1.1) + 1;
-        upgradeHourlyIncomeCost = Math.floor(upgradeHourlyIncomeCost * 1.1);
+        hourlyIncome = hourlyIncome * 1.2 + 1;
+        upgradeHourlyIncomeCost = upgradeHourlyIncomeCost * 1.3;
         updateUI();
         saveGame();
     } else {
@@ -74,10 +78,28 @@ setInterval(() => {
     saveGame();
 }, 1000); // 1000 ms = 1 second
 
+// Event listener for resetting the game
 document.getElementById('reset').addEventListener('click', function() {
     if (confirm('Are you sure you want to reset the game?')) {
-        localStorage.clear(); // Clear all data in local storage
+        // Clear all data from local storage
+        localStorage.clear();
+
+        // Reset all variables to their initial values
+        coins = 0;
+        tapIncome = 1;
+        tapCount = 0;
+        maxTaps = 1000;
+        hourlyIncome = 0;
+        upgradeTapIncomeCost = 10;
+        upgradeHourlyIncomeCost = 20;
+
+        // Update the UI to reflect the reset state
+        updateUI();
+
+        // Save the reset state
+        saveGame();
         location.reload(); // Reload the page to reset all variables and UI
+
     }
 });
 
